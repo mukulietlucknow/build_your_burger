@@ -97,6 +97,14 @@
     border-radius: 20px;
 }
 
+.greens {
+    width: 90%;
+    height: 4.5%;
+    margin: 2% auto;
+    background: linear-gradient(#0d8f14, #0f790c);
+    border-radius: 20px;
+}
+
 .Salad {
     width: 85%;
     height: 7%;
