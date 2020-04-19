@@ -4,6 +4,9 @@ import {Route} from 'react-router-dom';
 import ContactData from './Contactdata/Contactdata';
 import {connect} from 'react-redux';
 
+
+// this checkout has created
+
 class Checkout extends Component{
     // state = {
     //     ingredients : null, 
