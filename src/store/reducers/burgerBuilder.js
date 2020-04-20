@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
+import {updateObject} from '../utility';
 
 const initialState = {
     ingredients: null,
@@ -14,17 +15,29 @@ const INGREDIENT_PRICES = {
 }
 
 
+const addIngredient = (state , action) => {
+    const updatedIngredient = {[action.ingredientName] : state.ingredients[action.ingredientName] + 1};
+            const updatedIngredients = updateObject(state.ingredients,updatedIngredient);
+            const updatedState = {
+                ingredients : updatedIngredients,
+                totalprice: state.totalprice + INGREDIENT_PRICES[action.ingredientName]
+            }
+            return updateObject(state , updatedState);
+}
+
 const reducer = (state = initialState , action) => {
     switch(action.type){
         case actionTypes.ADD_INGREDIENT:
-            return{
-                ...state,
-                ingredients : {
-                    ...state.ingredients,
-                    [action.ingredientName] : state.ingredients[action.ingredientName] + 1
-                },
-                totalprice: state.totalprice + INGREDIENT_PRICES[action.ingredientName]
-            }
+            return addIngredient();
+            // return{
+            //     updateObject(state, updatedState)
+            //     // ...state,
+            //     // ingredients : {
+            //     //     ...state.ingredients,
+            //     //     [action.ingredientName] : state.ingredients[action.ingredientName] + 1
+            //     // },
+            //     // totalprice: state.totalprice + INGREDIENT_PRICES[action.ingredientName]
+            // };
         case actionTypes.REMOVE_INGREDIENT:
             return{
                 ...state,
@@ -43,6 +56,7 @@ const reducer = (state = initialState , action) => {
                     cheese: action.ingredients.cheese,
                     meat : action.ingredients.meat
                 },
+                totalprice: 4,
                 error:false
             };
         case actionTypes.FETCH_INGREDIENT_FAILED:
