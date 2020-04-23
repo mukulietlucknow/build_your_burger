@@ -7,6 +7,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
+import {checkvalidity} from '../../../shared/utility';
 
 class ContactData extends Component {
 
@@ -121,25 +122,7 @@ class ContactData extends Component {
         // });
     }
 
-    checkvalidity(value , rules){
-        let isValid = true;
-        if(!rules){
-            return true;
-        }
-
-        if(rules.required){
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if(rules.minLength){
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if(rules.maxLength){
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-        return isValid;
-    }
+    
 
     inputChangedHandler = (event , inputIdentifier) => {
         const updatedOrderForm = {
@@ -150,7 +133,7 @@ class ContactData extends Component {
         };
 
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkvalidity(updatedFormElement.value , updatedFormElement.validation);
+        updatedFormElement.valid = checkvalidity(updatedFormElement.value , updatedFormElement.validation);
         updatedFormElement.touched = true;
         //console.log(updatedFormElement.valid);
         updatedOrderForm[inputIdentifier] = updatedFormElement;
