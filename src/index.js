@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
 import createSagaMiddleware from 'redux-saga';
-import {watchAuth} from './store/sagas/index';
+import {watchAuth,watchBurgerBuilder , watchOrder} from './store/sagas/index';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -31,6 +31,8 @@ const store = createStore(rootReducer,composeEnhancers(
 ));
 
 sagaMiddleware.run(watchAuth);
+sagaMiddleware.run(watchBurgerBuilder);
+sagaMiddleware.run(watchOrder);
 
 const app= (
     <Provider store={store}>

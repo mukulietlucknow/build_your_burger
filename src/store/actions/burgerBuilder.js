@@ -29,12 +29,16 @@ export const fetchIngredientFailed = () => {
 };
 
 export const initIngredients = () => {
-    return dispatch => {
-        axios.get('https://burger-f0ba1.firebaseio.com/ingredients.json').then(response => {
-            dispatch(setIngredient(response.data));
-            console.log(response);
-        }).catch(error => {
-            dispatch(fetchIngredientFailed())
-        });
-    };
+    // return dispatch => {
+    //     axios.get('https://burger-f0ba1.firebaseio.com/ingredients.json').then(response => {
+    //         dispatch(setIngredient(response.data));
+    //         console.log(response);
+    //     }).catch(error => {
+    //         dispatch(fetchIngredientFailed())
+    //     });
+    // };
+
+    return {
+        type : actionTypes.INIT_INGREDIENT,
+    }
 }
